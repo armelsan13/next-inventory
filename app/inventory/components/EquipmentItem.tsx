@@ -26,7 +26,7 @@ export function EquipmentItem({ id, title, description, tags }: EquipmentItem) {
                 </div>            
                 <p>{description}</p>
                 <div className="card-actions justify-end">
-                    {tags.map(tag => (
+                    {tags.map((tag : any) => (
                         <div key={tag.id} className="badge badge-accent px-3">{tag.title}</div>
                     ))}
                 </div>
