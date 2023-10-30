@@ -19,10 +19,10 @@ export default async function RootLayout({
 
   return (
     <html lang="en" data-theme="light">
-      <body className={`${inter.className}`}>
+      <body className='dark:bg-gray-100 dark:text-gray-900'>
         <NextAuthProvider>
         <Navbar />
-          <main className="container mx-auto dark:bg-gray-100 dark:text-gray-900">
+          <main className="container mx-auto">
             {children}
           </main>
         </NextAuthProvider>

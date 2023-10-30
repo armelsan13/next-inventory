@@ -3,23 +3,24 @@ import getAllTags from "@/lib/getAllTags"
 import { redirect } from "next/navigation"
 
 async function createTag(data: FormData) {
+    'use server'
+    
     const title = data.get('title')?.valueOf()
     const description = data.get('description')
 
     if(typeof title !== 'string' || title.length === 0) {
-        throw new Error("Invalid");
-        
+        throw new Error("Invalid Title");
     }
 
-    await prisma.equipments.create({data: {}})
+    await prisma.equipments.create({data: {title: title, description: data.get('description'), tags: {connect: {tag: data.get('tags')}}}})
 
-    redirect('/inventory')
+    // redirect('/inventory')
 }
 
 export default async function Form() {
     const tags = await getAllTags()
     return (
-        <form className="w-full" action=''>
+        <form className="w-full" action={createTag}>
             {/* <label htmlFor="title">Title</label> */}
             <input
                 type="text"
@@ -37,7 +38,7 @@ export default async function Form() {
                 placeholder="Description"
                 rows={10}
             ></textarea>
-            <select className="select select-bordered w-full mb-4">
+            <select name="tags" className="select select-bordered w-full mb-4">
             <option disabled selected>Set Tag</option>
                 {tags.map(tag => (
                     <option key={tag.id} value={tag.id}>{tag.title}</option>

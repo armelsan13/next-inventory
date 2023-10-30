@@ -13,7 +13,6 @@ datasource db {
 model Tags {
   id String @id @default(uuid())
   title String
-  description String?
   createdAt DateTime @default(now())
   updated DateTime @updatedAt
   equipments Equipments[]

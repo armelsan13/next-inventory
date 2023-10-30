@@ -14,7 +14,7 @@ export default async function Inventory() {
         <div className="flex-none"><a href="/inventory/new" className="btn btn-primary btn-sm w-[5rem]">ADD</a></div>
       </div>
       <hr className="h-[0.1rem] my-2 bg-gray-400" />
-      <div className="grid grid-cols-6">
+      <div className="grid grid-cols-4 gap-4">
         {equipments.map(equipment => (
           <EquipmentItem key={equipment.id} {...equipment}/>
         ))}
