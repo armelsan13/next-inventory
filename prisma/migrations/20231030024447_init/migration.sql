@@ -1,0 +1,7 @@
+-- CreateTable
+CREATE TABLE "Tags" (
+    "id" TEXT NOT NULL PRIMARY KEY,
+    "title" TEXT NOT NULL,
+    "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updated" DATETIME NOT NULL
+);
