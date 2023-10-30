@@ -12,7 +12,7 @@ async function createTag(data: FormData) {
         throw new Error("Invalid Title");
     }
 
-    await prisma.equipments.create({data: {title: title, description: data.get('description'), tags: {connect: {tag: data.get('tags')}}}})
+    await prisma.equipments.create({data: {title: title, description: data.get('description') as string | null}})
 
     // redirect('/inventory')
 }
