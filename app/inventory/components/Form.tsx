@@ -11,11 +11,7 @@ async function createTag(data: FormData) {
         throw new Error("Invalid Title");
     }
 
-    await prisma.equipments.update({
-        where: {
-            id: data.get('id') as string
-        },
-        data: {
+    await prisma.equipments.create({data: {
         title: title, 
         description: data.get('description') as string | null,
         tagId: data.get('tag') as string
@@ -25,13 +21,19 @@ async function createTag(data: FormData) {
 }
 
 async function updateTag(data: FormData) {
+    'use server'
+
     const title = data.get('title')?.valueOf()
     
     if(typeof title !== 'string' || title.length === 0) {
         throw new Error("Invalid Title");
     }
 
-    await prisma.equipments.create({data: {
+    await prisma.equipments.update({
+        where: {
+            id: data.get('id') as string
+        },
+        data: {
         title: title, 
         description: data.get('description') as string | null,
         tagId: data.get('tag') as string
@@ -70,7 +72,7 @@ type Props = {
 export default async function Form( { equipment, btnText} : Props ) {
     const tags = await getAllTags()
     return (
-        <form className="w-full" action={createTag}>
+        <form className="w-full" action={btnText !== 'Update' ? (createTag) : (updateTag) }>
             {/* <label htmlFor="title">Title</label> */}
             <input type="hidden" name="id" defaultValue={equipment?.id} />
             <input
