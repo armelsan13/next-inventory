@@ -19,9 +19,7 @@ export function EquipmentItem({ id, title, description, tags }: Equipment) {
 
     const tagsList = tags ? (
         <div className="card-actions justify-end">
-                    {tags.map((tag : Tag) => (
-                        <div key={tag.id} className="badge badge-accent px-3">{tag.title}</div>
-                    ))}
+                    <div key={tags.id} className="badge badge-accent px-3">{tags.title}</div>
                 </div>
     ) : null
 
@@ -36,7 +34,7 @@ export function EquipmentItem({ id, title, description, tags }: Equipment) {
                             {title}
                         </h2>
                     </div>
-                    <div className="flex-none"><Link href='#' className='btn btn-outline btn-xs'>Edit</Link></div>
+                    <div className="flex-none"><Link href={`/inventory/new/${id}`} className='btn btn-outline btn-xs'>Edit</Link></div>
                 </div>            
                 <p>{description}</p>
                 {tagsList}

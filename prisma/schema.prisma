@@ -10,19 +10,20 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Tags {
-  id String @id @default(uuid())
-  title String
-  createdAt DateTime @default(now())
-  updated DateTime @updatedAt
-  equipments Equipments[]
-}
-
 model Equipments {
   id String @id @default(uuid())
   title String
   description String?
   createdAt DateTime @default(now())
   updated DateTime @updatedAt
-  tags Tags[]
+  tagId  String
+  tags Tags @relation(fields: [tagId], references: [id])
+}
+
+model Tags {
+  id String @id @default(uuid())
+  title String
+  createdAt DateTime @default(now())
+  updated DateTime @updatedAt
+  Equipments Equipments[]
 }

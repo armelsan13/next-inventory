@@ -1,6 +1,7 @@
 import getAllEquipments from "@/lib/getAllEquipments";
 import { isLogged } from "../api/auth/[...nextauth]/auth"
 import { EquipmentItem } from "./components/EquipmentItem";
+import Link from "next/link";
 
 export default async function Inventory() {
   await isLogged()

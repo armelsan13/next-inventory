@@ -12,12 +12,20 @@ async function createTag(data: FormData) {
         throw new Error("Invalid Title");
     }
 
-    await prisma.equipments.create({data: {title: title, description: data.get('description') as string | null}})
+    await prisma.equipments.create({data: {
+        title: title, 
+        description: data.get('description') as string | null,
+        tagId: data.get('tag') as string
+    }})
 
-    // redirect('/inventory')
+    redirect('/inventory')
 }
 
-export default async function Form() {
+type ButtonProp = {
+    btnText: string | null
+}
+
+export default async function Form( {btnText} : ButtonProp ) {
     const tags = await getAllTags()
     return (
         <form className="w-full" action={createTag}>
@@ -34,12 +42,13 @@ export default async function Form() {
             <textarea
                 name="description"
                 id="description"
+                
                 className="w-full px-4 py-4 border border-gray-300 rounded-[1rem]"
                 placeholder="Description"
                 rows={10}
             ></textarea>
-            <select name="tags" className="select select-bordered w-full mb-4">
-            <option disabled selected>Set Tag</option>
+            <select name="tag" defaultValue='0' className="select select-bordered w-full mb-4">
+            <option disabled>Set Tag</option>
                 {tags.map(tag => (
                     <option key={tag.id} value={tag.id}>{tag.title}</option>
                 ))}
@@ -48,7 +57,7 @@ export default async function Form() {
                 type="submit"
                 className="btn btn-primary w-full"
             >
-                Create
+                {btnText}
             </button>
         </form>
     )

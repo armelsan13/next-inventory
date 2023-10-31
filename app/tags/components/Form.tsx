@@ -15,7 +15,11 @@ async function createTag(data: FormData) {
     redirect('/tags')
 }
 
-export default function Form() {
+type ButtonProp = {
+    btnText: string | null
+}
+
+export default function Form( {btnText} : ButtonProp ) {
     
     return (
         <form className="w-full" action={createTag}>
@@ -30,7 +34,7 @@ export default function Form() {
                 type="submit"
                 className="btn btn-primary w-full"
             >
-                Create
+                {btnText}
             </button>
         </form>
     )
