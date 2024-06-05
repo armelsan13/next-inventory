@@ -15,6 +15,7 @@ export default async function Navbar() {
                     <a className="btn btn-ghost normal-case text-xl" href="/dashboard">Dashboard</a>
                     <a className="btn btn-ghost normal-case text-xl" href="/inventory">Inventory</a>
                     <a className="btn btn-ghost normal-case text-xl" href="/tags">Tags</a>
+                    <a className="btn btn-ghost normal-case text-xl" href="/bookings">Bookings</a>
                 </div>
                 <div className="flex-none gap-2">
                     {session?.user?.email ? (
